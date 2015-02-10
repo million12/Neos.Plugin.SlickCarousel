@@ -4,15 +4,10 @@
     "description": "Slick carousel for TYPO3 Neos",
     "license": ["MIT"],
     "authors": [
-        {
-            "name": "Marcin Ryzycki",
-            "email": "marcin@m12.io",
-            "homepage": "http://m12.io",
-            "role": "Developer"
-        }
+        { "name": "Marcin Ryzycki", "role": "Developer", "email": "marcin@m12.io", "homepage": "http://m12.io" }
     ],
     "require": {
-        "typo3/neos-nodetypes": "~1.2.0"
+        "typo3/neos-nodetypes": "*"
     },
     "autoload": {
         "psr-0": {

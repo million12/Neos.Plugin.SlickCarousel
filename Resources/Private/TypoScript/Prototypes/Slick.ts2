@@ -5,9 +5,11 @@ prototype(M12.SlickCarousel:Slick) < prototype(TYPO3.Neos:Content) {
 	
 	node = ${node}
 	
-	# Always generate default ID, no matter if user provided it or not
-	attributes.id = ${q(node).property('customHtmlId') ? String.trim(q(node).property('customHtmlId')) : 'slick-'+q(node).property('_nodeData.identifier')}
-
+	# Generate default ID, no matter if overridden by user (customHtmlId) or not
+	slickElementId = ${q(node).property('customHtmlId') ? q(node).property('customHtmlId') : 'slick-'+q(node).property('_identifier')}
+	@override.slickElementId = ${this.slickElementId}
+	attributes.id = ${slickElementId}
+	
 	slickConfig = TYPO3.TypoScript:RawArray {
 		adaptiveHeight      = ${q(node).property('adaptiveHeight') ? true : false}
 		autoplay            = ${q(node).property('autoplay') ? true : false}

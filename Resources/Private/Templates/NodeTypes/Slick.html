@@ -4,7 +4,7 @@
 	<ts:render path="slickItems" />
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$('#{attributes.id}').slick({slickConfig -> f:format.json()});
+			$('#{slickElementId}').slick({slickConfig -> f:format.json() -> f:format.raw()});
 		});
 	</script>
 </f:section>

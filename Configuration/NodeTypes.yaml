@@ -29,10 +29,7 @@
           tab: dev
   constraints:
     nodeTypes:
-      '*': FALSE # No children items allowed
-  childNodes:
-    content:
-      type: 'TYPO3.Neos:ContentCollection'
+      '*': TRUE
   properties:
     adaptiveHeight:
       type: boolean
@@ -43,6 +40,7 @@
           position: 80
     autoplay:
       type: boolean
+      defaultValue: true
       ui:
         label: 'Autoplay'
         inspector:
@@ -60,22 +58,39 @@
         numberRange:
           minimum: 10
           maximum: 999999
-    arrows:
-      type: boolean
-      defaultValue: TRUE
-      ui:
-        label: 'Prev/Next Arrows'
-        inspector:
-          group: 'slickSettings'
-          position: 10
     centerMode:
       type: boolean
       ui:
-        label: 'Enables centered view with partial prev/next slides'
+        label: 'Center for partial prev/next slides'
         inspector:
           group: 'slickSecondary'
+          position: 70
+    cssEase:
+      type: string
+      ui:
+        label: 'Animation (easing) style'
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'slickSettings'
+          position: 99
+          editor: 'TYPO3.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            placeholder: 'Default: ease-out'
+            allowEmpty: TRUE
+            values:
+              linear:
+                label: 'linear'
+              ease:
+                label: 'ease'
+              ease-in:
+                label: 'ease-in'
+              ease-in-out:
+                label: 'ease-in-out'
+              ease-out:
+                label: 'ease-out'
     dots:
       type: boolean
+      defaultValue: TRUE
       ui:
         label: 'Show dot indicators'
         inspector:
@@ -88,28 +103,23 @@
         label: 'Enable mouse dragging'
         inspector:
           group: 'slickSecondary'
+          position: 70
     fade:
       type: boolean
+      defaultValue: TRUE
       ui:
         label: 'Enable fade'
         inspector:
           group: 'slickSettings'
           position: 10
-    easing:
-      type: string
+    arrows:
+      type: boolean
+      defaultValue: TRUE
       ui:
-        label: 'Animation (easing) type'
-        reloadIfChanged: TRUE
+        label: 'Show Prev/Next Arrows'
         inspector:
           group: 'slickSettings'
-          position: 99
-          editor: 'TYPO3.Neos/Inspector/Editors/SelectBoxEditor'
-          editorOptions:
-            placeholder: 'Default / Linear'
-            allowEmpty: TRUE
-            values:
-              linear:
-                label: 'Linear'
+          position: 10
     infinite:
       type: boolean
       defaultValue: TRUE
@@ -117,6 +127,7 @@
         label: 'Infinite loop sliding'
         inspector:
           group: 'slickSecondary'
+          position: 70
     initialSlide:
       type: integer
       defaultValue: 0
@@ -136,12 +147,14 @@
         label: 'Pause autoplay on hover'
         inspector:
           group: 'slickSecondary'
+          position: 20
     pauseOnDotsHover:
       type: boolean
       ui:
         label: 'Pause autoplay when a dot is hovered'
         inspector:
           group: 'slickSecondary'
+          position: 20
     responsive:
       type: string
       ui:
@@ -151,6 +164,30 @@
           editorOptions:
             buttonLabel: 'Responsive settings'
             highlightingMode: 'application/json'
+    rows:
+      type: integer
+      defaultValue: 1
+      ui:
+        label: 'Number of rows'
+        inspector:
+          group: 'slickSecondary'
+          position: 90
+      validation:
+        numberRange:
+          minimum: 1
+          maximum: 91
+    slidesPerRow:
+      type: integer
+      defaultValue: 1
+      ui:
+        label: 'Slides per row'
+        inspector:
+          group: 'slickSecondary'
+          position: 91
+      validation:
+        numberRange:
+          minimum: 1
+          maximum: 1000
     slidesToShow:
       type: integer
       defaultValue: 1
@@ -193,15 +230,25 @@
         label: 'Variable width slides'
         inspector:
           group: 'slickSecondary'
+          position: 60
     vertical:
       type: boolean
       ui:
         label: 'Vertical slide mode'
         inspector:
           group: 'slickSecondary'
+          position: 60
     rtl:
       type: boolean
       ui:
-        label: 'Right-to-left slider''s direction'
+        label: 'Right-to-left direction'
         inspector:
           group: 'slickSecondary'
+          position: 89
+    nextOnClick:
+      type: boolean
+      ui:
+        label: 'Next slide on click'
+        inspector:
+          group: 'slickSecondary'
+          position: 10

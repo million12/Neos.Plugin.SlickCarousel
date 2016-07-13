@@ -1,56 +1,76 @@
 # M12.SlickCarousel:Slick
 prototype(M12.SlickCarousel:Slick) < prototype(TYPO3.Neos:Content) {
-	templatePath = 'resource://M12.SlickCarousel/Private/Templates/NodeTypes/Slick.html'
-	sectionName = 'slick'
-	
-	node = ${node}
-	
+	slickSlidesCount = ${q(node).children().count()}
+
 	# Generate default ID, no matter if overridden by user (customHtmlId) or not
 	slickElementId = ${q(node).property('customHtmlId') ? q(node).property('customHtmlId') : 'slick-'+q(node).property('_identifier')}
-	@override.slickElementId = ${this.slickElementId}
+	@context.slickElementId = ${this.slickElementId}
 	attributes.id = ${slickElementId}
-	
-	slickConfig = TYPO3.TypoScript:RawArray {
+	attributes.class.slick = 'slick-slider'
+
+	attributes.data-slick = TYPO3.TypoScript:RawArray {
 		adaptiveHeight      = ${q(node).property('adaptiveHeight') ? true : false}
 		autoplay            = ${q(node).property('autoplay') ? true : false}
+		autoplay.@if.fe     = ${node.context.workspace.name == 'live'}
 		autoplaySpeed       = ${q(node).property('autoplaySpeed') ? q(node).property('autoplaySpeed') : 3000}
-		arrows              = ${q(node).property('arrows') ? true : false}
 		centerMode          = ${q(node).property('centerMode') ? true : false}
+		cssEase             = ${q(node).property('cssEase') ? q(node).property('cssEase') : 'ease-out'}
 		dots                = ${q(node).property('dots') ? true : false}
 		draggable           = ${q(node).property('draggable') ? true : false}
 		fade                = ${q(node).property('fade') ? true : false}
-		easing              = ${q(node).property('easing') ? q(node).property('easing') : 'linear'}
+		arrows              = ${q(node).property('arrows') ? true : false}
+		mobileFirst         = ${true}
 		infinite            = ${q(node).property('infinite') ? true : false}
 		initialSlide        = ${q(node).property('initialSlide') ? q(node).property('initialSlide') : 0}
 		pauseOnHover        = ${q(node).property('pauseOnHover') ? true : false}
 		pauseOnDotsHover    = ${q(node).property('pauseOnDotsHover') ? true : false}
-		responsive          = ${q(node).property('responsive') ? q(node).property('responsive') : '{}'}
+		responsive          = ${q(node).property('responsive') ? q(node).property('responsive') : null}
+		rows                = ${q(node).property('rows') ? q(node).property('rows') : 1}
+		slidesPerRow        = ${q(node).property('slidesPerRow') ? q(node).property('slidesPerRow') : 1}
 		slidesToShow        = ${q(node).property('slidesToShow') ? q(node).property('slidesToShow') : 1}
 		slidesToScroll      = ${q(node).property('slidesToScroll') ? q(node).property('slidesToScroll') : 1}
 		speed               = ${q(node).property('speed') ? q(node).property('speed') : 300}
 		variableWidth       = ${q(node).property('variableWidth') ? true : false}
 		vertical            = ${q(node).property('vertical') ? true : false}
 		rtl                 = ${q(node).property('rtl') ? true : false}
+
+		# Non-standard option passed to Slick
+		nextOnClick         = ${q(node).property('nextOnClick') ? true : false}
+		nextOnClick.@if.fe  = ${node.context.workspace.name == 'live'}
 	}
-	
-	@override.slickContainerAttributes = ${this.attributes}
-	
-	slickItems = TYPO3.Neos:ContentCollection {
-		nodePath = 'content'
-		
-		iterationName = 'iterator'
-		itemName = 'node'
-		itemRenderer = M12.SlickCarousel:SlickItem
+	attributes.data-slick.@process.toJson = ${Json.stringify(value)}
+
+	@context.slickContainerAttributes = ${this.attributes}
+
+	slickContent = TYPO3.TypoScript:Tag {
+		tagName = 'div'
+		attributes = ${slickContainerAttributes}
+
+		content = TYPO3.TypoScript:Collection {
+			collection = ${q(node).children()}
+			itemRenderer = M12.SlickCarousel:SlickItem
+			itemName = 'node'
+			iterationName = 'iterator'
+		}
+		# Add additional wrapping to slick outer div, because otherwise createjs won't work (it requires elements of contentcollection to be direct children of contentcollection).
+		# TODO: Can be removed when createjs is dropped.
+		@process.contentElementWrapping = TYPO3.Neos:ContentElementWrapping
 	}
+	@process.wrapRemover = M12.Utils:WrapRemover
+	@process.wrapRemover.wrapperClass = 'extra-wrapper-required-by-neos-backend'
 }
 
 # M12.SlickCarousel:SlickItem
-prototype(M12.SlickCarousel:SlickItem) < prototype(TYPO3.Neos:Content) {
-	templatePath = 'resource://M12.SlickCarousel/Private/Templates/NodeTypes/Slick.html'
-	sectionName = 'slickItem'
+prototype(M12.SlickCarousel:SlickItem) < prototype(TYPO3.TypoScript:Tag) {
+	attributes.class = 'slick-slide'
+	attributes.data-slick-index = ${iterator.cycle}
 
-	iterator = ${iterator}
-	slickContainerAttributes = ${slickContainerAttributes}
+	content = TYPO3.Neos:ContentCase
 
-	itemContent = TYPO3.Neos:ContentCase
+	prototype(TYPO3.Neos:Content) {
+		# Remove contentElementWrapping, because wrapping is already added for SlickItem (see below)
+		@process.contentElementWrapping >
+	}
+
+	@process.contentElementWrapping = TYPO3.Neos:ContentElementWrapping
 }

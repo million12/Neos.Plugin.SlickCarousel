@@ -1,23 +1,47 @@
-{namespace ts=TYPO3\TypoScript\ViewHelpers}
+{namespace neos=TYPO3\Neos\ViewHelpers}
 
-<f:section name="slick">
-	<ts:render path="slickItems" />
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('#{slickElementId}').slick({slickConfig -> f:format.json() -> f:format.raw()});
-		});
-	</script>
-</f:section>
-
-<!-- Slider item -->
-<f:section name="slickItem">
-	<f:if condition="{iterator.isFirst}">
-		<div{slickContainerAttributes -> f:format.raw()}>
-	</f:if>
-
-	<div><ts:render path="itemContent" /></div>
-
-	<f:if condition="{iterator.isLast}">
-		</div>
-	</f:if>
-</f:section>
+<f:if condition="{slickSlidesCount} > 0">
+	<f:then>
+		{slickContent -> f:format.raw()}
+	</f:then>
+	<f:else>
+		<f:if condition="{neos:rendering.inEditMode()}">
+			<style>
+				.slick-slider-empty {
+					margin: 1rem auto;
+					padding: 2rem 1rem;
+					text-align: center;
+					color: #fff;
+					font-size: 150%;
+					font-weight: bold;
+					border: 1px solid #aaa;
+					background-color: #ccc;
+				}
+				.slick-slider-empty .fa-plus {
+					position: relative;
+					display: inline-block;
+					width: 40px;
+					height: 40px;
+					line-height: 40px;
+					font-size: 14px;
+					text-align: center;
+					vertical-align: middle;
+					background-color: #444;
+				}
+				.slick-slider-empty .fa-long-arrow-right {
+					position: absolute;
+					bottom: 2px;
+					right: 6px;
+					color: #00b5ff;
+				}
+			</style>
+			<div class="slick-slider-empty">
+				<p>
+					Please add content <em>inside</em>
+					<i class="fa fa-plus"><i class="fa fa-long-arrow-right"></i></i>
+					the slider.
+				</p>
+			</div>
+		</f:if>
+	</f:else>
+</f:if>

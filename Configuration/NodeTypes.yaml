@@ -7,7 +7,9 @@
   superTypes:
     - 'TYPO3.Neos:Content'
   ui:
-    label: 'Slick carousel'
+    label: 'Slick Carousel'
+    help:
+      message: _Slick Slider_ is an easy, powerful, responsive slider that allows users to swipe on touch-enabled devices.
     icon: 'icon-picture'
     inlineEditable: TRUE
     inspector:

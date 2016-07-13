@@ -18,19 +18,21 @@ composer require m12/neos-nodetype-slickcarousel:dev-master
 
 * Add the following code to the end of BODY tag:
 ```
-var slickEl = $('.m12-slickcarousel-slick');
-
-$(slickEl).on('init', function(event, slick) {
-    // Support non-standard 'nextOnClick' option:
-    if (slick.slickGetOption('nextOnClick')) {
-        $(slick.$slider).on('click', function() {
-            slick.slickNext();
-        });
-    }
+$(document).ready(function () {
+    var slickEl = $('.m12-slickcarousel-slick');
+    
+    $(slickEl).on('init', function(event, slick) {
+        // Support non-standard 'nextOnClick' option:
+        if (slick.slickGetOption('nextOnClick')) {
+            $(slick.$slider).on('click', function() {
+                slick.slickNext();
+            });
+        }
+    });
+    
+    // Initialise Slick
+    $(slickEl).slick();
 });
-
-// Initialise Slick
-$(slickEl).slick();
 ```
 
 Also see the [Pb.Site](https://github.com/million12/Pb.Site) site package

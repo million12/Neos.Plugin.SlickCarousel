@@ -5,7 +5,7 @@
 # -----------------------------------------------------------------------------
 'M12.SlickCarousel:Slick':
   superTypes:
-    - 'TYPO3.Neos:Content'
+    'TYPO3.Neos:Content': TRUE
   ui:
     label: 'Slick Carousel'
     help:

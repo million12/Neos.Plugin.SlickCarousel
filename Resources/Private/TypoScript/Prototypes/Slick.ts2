@@ -1,11 +1,5 @@
 # M12.SlickCarousel:Slick
 prototype(M12.SlickCarousel:Slick) < prototype(TYPO3.Neos:Content) {
-	slickSlidesCount = ${q(node).children().count()}
-
-	# Generate default ID, no matter if overridden by user (customHtmlId) or not
-	slickElementId = ${q(node).property('customHtmlId') ? q(node).property('customHtmlId') : 'slick-'+q(node).property('_identifier')}
-	@context.slickElementId = ${this.slickElementId}
-	attributes.id = ${slickElementId}
 	attributes.class.slick = 'slick-slider'
 
 	attributes.data-slick = TYPO3.TypoScript:RawArray {
@@ -42,6 +36,7 @@ prototype(M12.SlickCarousel:Slick) < prototype(TYPO3.Neos:Content) {
 
 	@context.slickContainerAttributes = ${this.attributes}
 
+	slickSlidesCount = ${q(node).children().count()}
 	slickContent = TYPO3.TypoScript:Tag {
 		tagName = 'div'
 		attributes = ${slickContainerAttributes}

@@ -8,7 +8,7 @@
     ],
     "require": {
         "typo3/neos-nodetypes": "*",
-        "m12/utils": "*"
+        "m12/neos-utils": "*"
     },
     "autoload": {
         "psr-0": {

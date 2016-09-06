@@ -47,7 +47,9 @@ prototype(M12.SlickCarousel:Slick) < prototype(TYPO3.Neos:Content) {
 			itemName = 'node'
 			iterationName = 'iterator'
 		}
-		# Add additional wrapping to slick outer div, because otherwise createjs won't work (it requires elements of contentcollection to be direct children of contentcollection).
+		# Add additional wrapping to outer DIV, because otherwise
+		# CreateJS won't work. It requires elements of ContentCollection
+		# to be direct children of ContentCollection).
 		# TODO: Can be removed when createjs is dropped.
 		@process.contentElementWrapping = TYPO3.Neos:ContentElementWrapping
 	}
@@ -61,11 +63,5 @@ prototype(M12.SlickCarousel:SlickItem) < prototype(TYPO3.TypoScript:Tag) {
 	attributes.data-slick-index = ${iterator.cycle}
 
 	content = TYPO3.Neos:ContentCase
-
-	prototype(TYPO3.Neos:Content) {
-		# Remove contentElementWrapping, because wrapping is already added for SlickItem (see below)
-		@process.contentElementWrapping >
-	}
-
 	@process.contentElementWrapping = TYPO3.Neos:ContentElementWrapping
 }

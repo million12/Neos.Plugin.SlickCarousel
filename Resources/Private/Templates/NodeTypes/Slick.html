@@ -1,5 +1,6 @@
 {namespace neos=TYPO3\Neos\ViewHelpers}
 
+<div class="extra-wrapper-required-by-neos-backend">
 <f:if condition="{slickSlidesCount} > 0">
 	<f:then>
 		{slickContent -> f:format.raw()}
@@ -15,7 +16,7 @@
 					font-size: 150%;
 					font-weight: bold;
 					border: 1px solid #aaa;
-					background-color: #ccc;
+					background-color: rgba(204, 204, 204, .5);
 				}
 				.slick-slider-empty .fa-plus {
 					position: relative;
@@ -45,3 +46,4 @@
 		</f:if>
 	</f:else>
 </f:if>
+</div>

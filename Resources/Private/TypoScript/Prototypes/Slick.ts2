@@ -18,7 +18,7 @@ prototype(M12.SlickCarousel:Slick) < prototype(TYPO3.Neos:Content) {
 		initialSlide        = ${q(node).property('initialSlide') ? q(node).property('initialSlide') : 0}
 		pauseOnHover        = ${q(node).property('pauseOnHover') ? true : false}
 		pauseOnDotsHover    = ${q(node).property('pauseOnDotsHover') ? true : false}
-		responsive          = ${q(node).property('responsive') ? q(node).property('responsive') : null}
+		responsive          = ${q(node).property('responsive') ? String.trim(q(node).property('responsive')) : null}
 		rows                = ${q(node).property('rows') ? q(node).property('rows') : 1}
 		slidesPerRow        = ${q(node).property('slidesPerRow') ? q(node).property('slidesPerRow') : 1}
 		slidesToShow        = ${q(node).property('slidesToShow') ? q(node).property('slidesToShow') : 1}

@@ -37,6 +37,7 @@
       type: boolean
       ui:
         label: 'Adaptive height'
+        reloadIfChanged: TRUE
         inspector:
           group: 'slickSettings'
           position: 80
@@ -45,6 +46,7 @@
       defaultValue: true
       ui:
         label: 'Autoplay'
+        reloadIfChanged: TRUE
         inspector:
           group: 'slickSettings'
           position: 10
@@ -53,6 +55,7 @@
       defaultValue: 3000
       ui:
         label: 'Autoplay speed (ms)'
+        reloadIfChanged: TRUE
         inspector:
           group: 'slickSecondary'
           position: 20
@@ -64,6 +67,11 @@
       type: boolean
       ui:
         label: 'Center for partial prev/next slides'
+        help:
+          message: |
+            Enables centered view with partial prev/next slides.
+            Use with odd *# of slides to show*.
+        reloadIfChanged: TRUE
         inspector:
           group: 'slickSecondary'
           position: 70
@@ -95,6 +103,7 @@
       defaultValue: TRUE
       ui:
         label: 'Show dot indicators'
+        reloadIfChanged: TRUE
         inspector:
           group: 'slickSettings'
           position: 10
@@ -111,6 +120,10 @@
       defaultValue: TRUE
       ui:
         label: 'Enable fade'
+        help:
+          message: |
+            Enable *fading* instead of *sliding* when transitioning to the next slide.
+        reloadIfChanged: TRUE
         inspector:
           group: 'slickSettings'
           position: 10
@@ -119,6 +132,7 @@
       defaultValue: TRUE
       ui:
         label: 'Show Prev/Next Arrows'
+        reloadIfChanged: TRUE
         inspector:
           group: 'slickSettings'
           position: 10
@@ -135,6 +149,7 @@
       defaultValue: 0
       ui:
         label: 'Slide to start on'
+        reloadIfChanged: TRUE
         inspector:
           group: 'slickSecondary'
           position: 10
@@ -160,6 +175,13 @@
     responsive:
       type: string
       ui:
+        reloadIfChanged: TRUE
+        help:
+          message: |
+            Slick responsive settings.
+
+            Must be JavaScript array of objects, as described
+            in [Slick Carousel documentation](http://kenwheeler.github.io/slick/).
         inspector:
           group: 'slickDev'
           editor: 'TYPO3.Neos/Inspector/Editors/CodeEditor'
@@ -171,6 +193,11 @@
       defaultValue: 1
       ui:
         label: 'Number of rows'
+        help:
+          message: |
+            Setting this to more than 1 initializes grid mode.
+            Use *Slides per row* setting to set how many slides should be in each row.
+        reloadIfChanged: TRUE
         inspector:
           group: 'slickSecondary'
           position: 90
@@ -183,6 +210,10 @@
       defaultValue: 1
       ui:
         label: 'Slides per row'
+        help:
+          message: |
+            When grid mode (*Number of rows* is > 1), this sets how many slides are in each grid row.
+        reloadIfChanged: TRUE
         inspector:
           group: 'slickSecondary'
           position: 91
@@ -195,6 +226,12 @@
       defaultValue: 1
       ui:
         label: '# of slides to show'
+        reloadIfChanged: TRUE
+        help:
+          message: |
+            Sets number of slides to show.
+
+            **Note**: Cannot be used with *Enable fade* option.
         inspector:
           group: 'slickSettings'
           position: 90
@@ -207,9 +244,10 @@
       defaultValue: 1
       ui:
         label: '# of slides to scroll'
+        reloadIfChanged: TRUE
         inspector:
-          group: 'slickSecondary'
-          position: 10
+          group: 'slickSettings'
+          position: 91
       validation:
         numberRange:
           minimum: 1
@@ -219,6 +257,7 @@
       defaultValue: 300
       ui:
         label: 'Animation speed (ms)'
+        reloadIfChanged: TRUE
         inspector:
           group: 'slickSettings'
           position: 99
@@ -230,6 +269,7 @@
       type: boolean
       ui:
         label: 'Variable width slides'
+        reloadIfChanged: TRUE
         inspector:
           group: 'slickSecondary'
           position: 60
@@ -237,6 +277,7 @@
       type: boolean
       ui:
         label: 'Vertical slide mode'
+        reloadIfChanged: TRUE
         inspector:
           group: 'slickSecondary'
           position: 60
@@ -244,6 +285,7 @@
       type: boolean
       ui:
         label: 'Right-to-left direction'
+        reloadIfChanged: TRUE
         inspector:
           group: 'slickSecondary'
           position: 89

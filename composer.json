@@ -7,7 +7,8 @@
         { "name": "Marcin Ryzycki", "role": "Developer", "email": "marcin@m12.io", "homepage": "http://m12.io" }
     ],
     "require": {
-        "typo3/neos-nodetypes": "*"
+        "typo3/neos-nodetypes": "*",
+        "m12/neos-utils": "*"
     },
     "autoload": {
         "psr-0": {
